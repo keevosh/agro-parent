@@ -7,7 +7,7 @@ import java.util.Collection;
  * 
  * @author aggelos
  */
-public class AgroAutoompleteResponse {
+public class AgroAutocompleteResponse {
 
     private long total = 0;
     private long time = -1;

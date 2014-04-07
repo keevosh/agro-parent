@@ -10,11 +10,13 @@ import org.apache.commons.lang.StringUtils;
 import org.elasticsearch.client.transport.TransportClient;
 import static org.elasticsearch.common.settings.ImmutableSettings.settingsBuilder;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
+import org.springframework.core.env.Environment;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.util.Assert;
@@ -25,6 +27,9 @@ import org.springframework.util.Assert;
 @EnableAspectJAutoProxy
 @Import(EmailConfig.class)
 public class CoreConfig {
+
+    @Autowired
+    private Environment env;
 
     @Bean
     public ObjectMapper objectMapper() {
@@ -49,6 +54,9 @@ public class CoreConfig {
 
     @Bean
     public TransportClient elasticsearchClient() {
+//        String clusterName = env.getProperty("es.cluster.name", "agroknow");
+//        String[] clusterNodes = env.getProperty("es.cluster.nodes", "agro01.keevosh.gr:9300,agro02.keevosh.gr:9300,agro03.keevosh.gr:9300").split(",");
+
         String clusterName = "agroknow";
         String[] clusterNodes = new String[]{"agro01.keevosh.gr:9300","agro02.keevosh.gr:9300","agro03.keevosh.gr:9300"};
 

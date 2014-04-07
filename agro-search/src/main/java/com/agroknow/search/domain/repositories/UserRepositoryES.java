@@ -10,6 +10,8 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +23,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserRepositoryES implements UserRepository {
 
+    private final Logger log = LoggerFactory.getLogger(UserRepositoryES.class);
+
     @Autowired
     private TransportClient esClient;
 
@@ -30,7 +34,7 @@ public class UserRepositoryES implements UserRepository {
     @Override
     public User findByUserEmail(String email) {
         SearchRequestBuilder searchReqBuilder = esClient.prepareSearch("users").setTypes("user").setSize(1);
-        searchReqBuilder.setQuery(QueryBuilders.fieldQuery("email.raw", email));
+        searchReqBuilder.setQuery(QueryBuilders.queryString(email).defaultField("email.raw"));
         try {
             SearchResponse response = searchReqBuilder.execute().actionGet();
             if(response.getHits()==null || response.getHits().getTotalHits() < 1) {
@@ -43,7 +47,9 @@ public class UserRepositoryES implements UserRepository {
             user.setId(hit.getId());
             return user;
         } catch (Exception ex) {
-            throw new RuntimeException("Could not found user with email ["+email+"] in the ES user's index.", ex);
+            String msg = "Could not found user with email ["+email+"] in the ES user's index.";
+            log.error(msg, log.isDebugEnabled() ? ex : null);
+            throw new RuntimeException(msg, ex);
         }
     }
 
@@ -59,7 +65,9 @@ public class UserRepositoryES implements UserRepository {
             user.setId(hit.getId());
             return user;
         } catch (Exception ex) {
-            throw new RuntimeException("Could not found user by token in the ES user's index.", ex);
+            String msg = "Could not found user by token in the ES user's index.";
+            log.error(msg, log.isDebugEnabled() ? ex : null);
+            throw new RuntimeException(msg, ex);
         }
     }
 

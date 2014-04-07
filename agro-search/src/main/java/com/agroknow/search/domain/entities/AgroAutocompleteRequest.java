@@ -9,6 +9,13 @@ public class AgroAutocompleteRequest {
 
     private String query;
 
+    public AgroAutocompleteRequest() {
+    }
+
+    public AgroAutocompleteRequest(String query) {
+        this.query = query;
+    }
+
     public String getQuery() {
         return query;
     }
