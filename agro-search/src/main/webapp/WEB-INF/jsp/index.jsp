@@ -154,6 +154,15 @@
                 <pre style="padding-left: 30px;">http://&lt;DOMAIN&gt;/v1/akif?languageBlocks.en.description=sea+OR+africa&amp;page_size=25&amp;api_key=</pre>
                 <p><span>(the first 25 items with either <code>sea</code> or <code>africa</code> in the <code>languageBlocks.en.description</code>)</span></p>
                 <p>&nbsp;</p>
+
+                <h3 id="autocompletion">Suggestion/Autocomplete Queries</h3>
+                <p>The last but not least aspect of the API is its suggestion/autocompletion capabilities. You can provide the user's input to the API and
+                    get back suggestion from popular searches the user could use and bring him faster to results.</p>
+                <p><strong>Examples:</strong></p>
+                <pre style="padding-left: 30px;">http://&lt;DOMAIN&gt;/v1/_ac?q=pot&amp;api_key=</pre>
+                <p><span>(if previous search queries contain <code>potato</code> or <code>potatoes AND onions</code> or <code>potamology</code> those queries will
+                        be in the result and should be should as suggestions to the user)</span></p>
+                <p>&nbsp;</p>
             </div>
         </div>
     </body>
