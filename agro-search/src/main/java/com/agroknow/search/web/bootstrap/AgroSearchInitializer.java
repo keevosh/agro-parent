@@ -60,7 +60,7 @@ public class AgroSearchInitializer implements WebApplicationInitializer {
         //add the servlet with the web context
         ServletRegistration.Dynamic dispatcher = container.addServlet("default", new DispatcherServlet(webContext));
         dispatcher.setLoadOnStartup(1);
-        dispatcher.addMapping("/search-api");
+        dispatcher.addMapping("/");
 
         //add encoding filter
         CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
