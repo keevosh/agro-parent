@@ -50,12 +50,6 @@ public class SearchController {
         return searchRes;
     }
 
-    @RequestMapping(value = { "/_ac" }, method = { RequestMethod.GET })
-    public @ResponseBody AgroSearchResponse autocomplete(@PathVariable String fileFormat, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        AgroSearchRequest searchReq = buildSearchRequest(request);
-        return getSearchService(fileFormat).autocomplete(searchReq);
-    }
-
     @RequestMapping(value = "/{set}/{id}", method = { RequestMethod.GET })
     public @ResponseBody AgroSearchResponse fetch(@PathVariable String fileFormat, @PathVariable String set, @PathVariable String id, HttpServletRequest request, HttpServletResponse response) throws IOException {
         return getSearchService(fileFormat).fetch(set, id.split(","));

@@ -1,17 +1,17 @@
 package com.agroknow.search.domain.entities;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 
 /**
- * 
+ *
  * @author aggelos
  */
 public class AgroAutocompleteResponse {
 
     private long total = 0;
     private long time = -1;
-    private Collection<String> results = new ArrayList<String>(10);
+    private Collection<String> results = new HashSet<String>(10);
 
     public long getTotal() {
         return total;
@@ -41,8 +41,8 @@ public class AgroAutocompleteResponse {
         return results;
     }
 
-    public void addResult(String result) {
-        results.add(result);
+    public boolean addResult(String result) {
+        return results.add(result);
     }
 
     public void setResults(Collection<String> results) {

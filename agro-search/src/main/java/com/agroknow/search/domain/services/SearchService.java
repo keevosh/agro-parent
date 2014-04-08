@@ -1,8 +1,11 @@
 package com.agroknow.search.domain.services;
 
 import com.agroknow.domain.InternalFormat;
+import com.agroknow.search.domain.entities.AgroAutocompleteRequest;
+import com.agroknow.search.domain.entities.AgroAutocompleteResponse;
 import com.agroknow.search.domain.entities.AgroSearchRequest;
 import com.agroknow.search.domain.entities.AgroSearchResponse;
+import com.agroknow.search.domain.entities.UserQuery;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.Arrays;
@@ -133,16 +136,6 @@ public class SearchService<T extends InternalFormat> {
 
         // ..and
         return res;
-    }
-
-    /**
-     *
-     * @param req
-     * @return
-     * @throws IOException
-     */
-    public AgroSearchResponse<T> autocomplete(AgroSearchRequest req) throws IOException {
-        return null;
     }
 
     /**
